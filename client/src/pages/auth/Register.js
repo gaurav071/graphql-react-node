@@ -17,7 +17,7 @@ const Register = () => {
 
     await auth.sendSignInLinkToEmail(email, config);
     toast.success(`Email sent to ${email}`);
-    window.localStorage.setItem("emailFormRegistration", email);
+    window.localStorage.setItem("emailForRegistration", email);
     setEmail("");
     setLoading(false);
   };
