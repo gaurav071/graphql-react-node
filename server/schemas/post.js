@@ -7,14 +7,14 @@ module.exports = gql`
     description: String!
   }
 
-  type Query {
-    totalPosts: Int!
-    allPosts: [Post!]!
-  }
-
   input PostInput {
     title: String!
     description: String!
+  }
+
+  type Query {
+    totalPosts: Int!
+    allPosts: [Post!]!
   }
 
   type Mutation {

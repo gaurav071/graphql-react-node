@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
+import { useHistory } from "react-router-dom";
+
+import { AuthContext } from "../context/authContext";
 
 const GET_ALL_POSTS = gql`
   {
@@ -14,6 +17,16 @@ const GET_ALL_POSTS = gql`
 
 const Home = () => {
   const { data, loading, error } = useQuery(GET_ALL_POSTS);
+
+  // access context
+  const { state, dispatch } = useContext(AuthContext);
+
+  const updateUserName = () => {
+    dispatch({
+      type: "LOGGED_IN_USER",
+      payload: "Gaurav",
+    });
+  };
 
   if (loading) return <p className="p-5">Loading ...</p>;
 
@@ -33,6 +46,11 @@ const Home = () => {
           </div>
         ))}
       </div>
+      <hr />
+      {JSON.stringify(state.user)}
+      <button className="btn btn-primary" onClick={updateUserName}>
+        Change User Name
+      </button>
     </div>
   );
 };
