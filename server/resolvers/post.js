@@ -1,8 +1,12 @@
 const { posts } = require("../mock/post");
+const { authCheck } = require("../helpers/auth");
 
 // queries
 const totalPosts = () => posts.length;
-const allPosts = () => posts;
+const allPosts = async (parent, args, { req }) => {
+  await authCheck(req);
+  return posts;
+};
 
 // mutations
 const newPost = (parent, args, context) => {

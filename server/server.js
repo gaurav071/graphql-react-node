@@ -6,6 +6,8 @@ const { ApolloServer } = require("apollo-server-express");
 const { mergeTypeDefs, mergeResolvers } = require("@graphql-tools/merge");
 const { loadFilesSync } = require("@graphql-tools/load-files");
 
+const { authCheck } = require("./helpers/auth");
+
 require("dotenv").config();
 
 const app = express();
@@ -43,6 +45,7 @@ const resolvers = mergeResolvers(
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({req, res}) => ({req, res})
 });
 
 // applyMiddleware method connects Apollo Server to a specific HTTP framework ex. Express
@@ -51,7 +54,7 @@ apolloServer.applyMiddleware({ app });
 // express server
 const httpServer = http.createServer(app);
 
-app.get("/rest", (req, res) => {
+app.get("/rest", authCheck, (req, res) => {
   res.json({
     data: "REST Endpoint",
   });
