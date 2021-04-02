@@ -59,7 +59,7 @@ const CompleteRegistration = () => {
 
         // make API request to persist the user in mongodb
         userCreate();
-        history.push("/");
+        history.push("/profile");
       }
     } catch (error) {
       console.log("Error registering this user ", error);

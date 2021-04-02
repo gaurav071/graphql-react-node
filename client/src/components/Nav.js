@@ -37,6 +37,13 @@ const Nav = () => {
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
+          {user && (
+            <li className="nav-item active">
+            <Link className="nav-link" to="/profile">
+              {user && user.email.split('@')[0]}
+            </Link>
+          </li>
+          )}
           {!user && (
             <Fragment>
               <li className="nav-item active">

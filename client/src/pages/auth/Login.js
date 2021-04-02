@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
@@ -43,7 +43,7 @@ const Login = () => {
 
           // persist user info in mongodb
           userCreate();
-          history.push("/");
+          history.push("/profile");
         });
     } catch (error) {
       console.log("Login error ", error);
@@ -64,7 +64,7 @@ const Login = () => {
 
       // persist user info in mongodb
       userCreate();
-      history.push("/");
+      history.push("/profile");
     });
   };
 
@@ -83,6 +83,7 @@ const Login = () => {
         handleSubmit={handleSubmit}
         showPasswordInput="true"
       />
+      <Link className="text-danger float-right">Forgot Password</Link>
     </div>
   );
 };
